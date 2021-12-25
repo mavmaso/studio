@@ -1,0 +1,30 @@
+<h1>Teste</h1>
+
+<div class="meter">
+  <p><%= @brilho %></p>
+</div>
+
+<button phx-click="on">
+  <h3>ON</h3>
+</button>
+
+<button phx-click="off">
+  <h3>OFF</h3>
+</button>
+
+<button phx-click="up">
+  <h3>+10</h3>
+</button>
+
+<br>
+
+<form phx-change="update">
+  <input type="range" min="1" max="10" name="unit" value={@unit}>
+</form>
+
+<h3><%= @unit %></h3>
+
+<h2>WORKERS: <%= @workers %></h2>
+<button phx-click="refresh">
+  <h3>Refresh</h3>
+</button>
