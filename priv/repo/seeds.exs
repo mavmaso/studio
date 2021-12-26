@@ -1,11 +1,20 @@
-# Script for populating the database. You can run it as:
-#
-#     mix run priv/repo/seeds.exs
-#
-# Inside the script, you can read and write to any of your
-# repositories directly:
-#
-#     Studio.Repo.insert!(%Studio.SomeSchema{})
-#
-# We recommend using the bang functions (`insert!`, `update!`
-# and so on) as they will fail if something goes wrong.
+alias Studio.Repo
+alias Studio.Servers.Server
+
+%Server{
+  git_repo: "http//macaco.com",
+  name: "Monkey-1",
+  status: "up"
+} |> Repo.insert!()
+
+%Server{
+  git_repo: "http//alpha.com",
+  name: "Alpha Macaco",
+  status: "up"
+} |> Repo.insert!()
+
+%Server{
+  git_repo: "http//sapo.com",
+  name: "Sapinho-Primo",
+  status: "up"
+} |> Repo.insert!()

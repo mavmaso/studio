@@ -28,3 +28,9 @@
 <button phx-click="refresh">
   <h3>Refresh</h3>
 </button>
+
+<br>
+
+<select name="language">
+  <%= options_for_select(arr(), @type) %>
+</select>
