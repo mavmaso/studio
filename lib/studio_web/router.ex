@@ -20,6 +20,7 @@ defmodule StudioWeb.Router do
     get "/", PageController, :index
     live "/light", LightLive
     live "/servers", ServerLive
+    live "/chat", ChatLive
   end
 
   if Mix.env() in [:dev, :test] do

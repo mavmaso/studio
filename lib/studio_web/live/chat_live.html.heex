@@ -1,0 +1,14 @@
+<h2>Sala <%= @id%></h2>
+<%=for message <- @chat.messages do %>
+  <p>
+    <%= message.user.name %>: <%= message.content %>
+  </p>
+<% end %>
+
+<div class="form-group">
+  <%= form_for @message, "#", [phx_submit: :message], fn _f -> %>
+    <%= text_input :message, :content, placeholder: "diz ai..." %>
+    <%= hidden_input :message, :user_name, value: @id  %>
+    <%= submit "submit" %>
+  <% end %>
+</div>

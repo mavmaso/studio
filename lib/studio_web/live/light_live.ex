@@ -38,7 +38,7 @@ defmodule StudioWeb.LightLive do
 
   defp get_workers, do: Enum.random(5..20)
 
-  defp schedule_refresh do
-    Process.send_after(self(), :tick, 1000)
-  end
+  # defp schedule_refresh do
+  #   Process.send_after(self(), :tick, 1000)
+  # end
 end
