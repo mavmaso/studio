@@ -29,7 +29,7 @@ defmodule StudioWeb.LightLive do
 
   def handle_event("update", %{"unit" => value}, socket) do
     value = String.to_integer(value)
-    {:noreply, update(socket, :unit, fn _ -> value * 20 end )}
+    {:noreply, update(socket, :unit, fn _ -> value * 20 end)}
   end
 
   def handle_info(:tick, socket) do
@@ -38,7 +38,7 @@ defmodule StudioWeb.LightLive do
 
   defp get_workers, do: Enum.random(5..20)
 
-  # defp schedule_refresh do
-  #   Process.send_after(self(), :tick, 1000)
-  # end
+  def schedule_refresh do
+    Process.send_after(self(), :tick, 1000)
+  end
 end

@@ -35,7 +35,12 @@ defmodule Studio.ServersTest do
 
     test "update_server/2 with valid data updates the server" do
       server = server_fixture()
-      update_attrs = %{git_repo: "some updated git_repo", name: "some updated name", status: "some updated status"}
+
+      update_attrs = %{
+        git_repo: "some updated git_repo",
+        name: "some updated name",
+        status: "some updated status"
+      }
 
       assert {:ok, %Server{} = server} = Servers.update_server(server, update_attrs)
       assert server.git_repo == "some updated git_repo"
