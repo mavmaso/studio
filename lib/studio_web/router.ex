@@ -17,10 +17,12 @@ defmodule StudioWeb.Router do
   scope "/", StudioWeb do
     pipe_through :browser
 
-    get "/", PageController, :index
     live "/light", LightLive
     live "/servers", ServerLive
     live "/chat", ChatLive
+    live "/kanban", KanbanLive
+
+    live "/", LobbyLive
   end
 
   if Mix.env() in [:dev, :test] do
