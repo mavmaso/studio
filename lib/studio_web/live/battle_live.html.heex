@@ -1,0 +1,19 @@
+<h1><%= @topic %></h1>
+<button phx-click="commence">START</button>
+
+<p><%= @valor %></p>
+
+<%= if @role == "p1" do%>
+  <p> PLAYER ONE </p>
+
+  <button phx-click="up">
+    <h3>+10</h3>
+  </button>
+<% end %>
+
+<%= if @role == "p2" do%>
+  <p> PLAYER TWO </p>
+  <button phx-click="up">
+    <h3>+10</h3>
+  </button>
+<% end %>

@@ -7,9 +7,6 @@ defmodule StudioWeb.ArenaController do
     p1 = "WIP-1"
     p2 = "WIP-2"
 
-    # table = :ets.new(form["name"] |> String.to_atom, [:set, :named_table])
-    # :ets.insert(table, {:valor, 0})
-
     live_render(conn, StudioWeb.BattleLive, session: %{
       "name" => data["name"],
       "role" => data["role"],

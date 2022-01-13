@@ -2,39 +2,20 @@ defmodule StudioWeb.BattleLive do
   use StudioWeb, :live_view
 
   alias StudioWeb.Endpoint
-
-  def render(assigns) do
-    ~H"""
-      <h1><%= @topic %></h1>
-
-      <p><%= @valor %></p>
-
-      <%= if @role == "p1" do%>
-        <p> PLAYER ONE </p>
-
-        <button phx-click="up">
-          <h3>+10</h3>
-        </button>
-      <% end %>
-
-      <%= if @role == "p2" do%>
-        <p> PLAYER TWO </p>
-        <button phx-click="up">
-          <h3>+10</h3>
-        </button>
-      <% end %>
-    """
-  end
+  alias Studio.ETS
 
   def mount(_args, session, socket) do
     topic = "battle: #{session["name"]}"
-    Endpoint.subscribe(topic)
+    table = session["name"] |> String.to_atom
+
+    if connected?(socket), do: Endpoint.subscribe(topic)
 
     socket =
       assign(socket,
+        table: table,
         topic: topic,
-        valor: 0,
-        role: session["role"]
+        role: session["role"],
+        valor: ETS.lookup(table, :valor)[:valor] || 0
       )
 
     {:ok, socket}
@@ -43,10 +24,18 @@ defmodule StudioWeb.BattleLive do
   def handle_event("up", _params, %{assigns: values} = socket) do
     topic = values.topic
     valor = values.valor + 10
+    ETS.add(values.table, {:valor, valor})
 
     Endpoint.broadcast(topic, "update", %{valor: valor})
 
     {:noreply, assign(socket, valor: valor)}
+  end
+
+  def handle_event("commence", _params,  %{assigns: values} = socket) do
+    table = ETS.new(values.table)
+    ETS.add(table, {:valor, 1})
+
+    {:noreply, assign(socket, valor: 1)}
   end
 
   def handle_info(%{event: "update", payload: state}, socket) do
