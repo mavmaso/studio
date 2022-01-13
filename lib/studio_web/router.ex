@@ -17,13 +17,20 @@ defmodule StudioWeb.Router do
   scope "/", StudioWeb do
     pipe_through :browser
 
+    get "/", PageController, :new
+    post "/arenas", ArenaController, :battle
+  end
+
+  scope "/live" do
+    pipe_through :browser
+
     live "/light", LightLive
     live "/servers", ServerLive
     live "/chat", ChatLive
     live "/kanban", KanbanLive
-
-    live "/", LobbyLive
+    live "/battle", BattleLive
   end
+
 
   if Mix.env() in [:dev, :test] do
     import Phoenix.LiveDashboard.Router

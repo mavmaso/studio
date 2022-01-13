@@ -1,0 +1,15 @@
+<div>
+  <h1>Enter a Arena</h1>
+  <%= form_for @data, Routes.arena_path(@conn, :battle), fn f -> %>
+    <%= text_input f, :name, placeholder: "Nome da sala" %>
+
+    <%= select  f, :role, 
+      ["player one": "p1", "player two": "p2", guest: "guest"], 
+      prompt: [key: "Choose your role", disabled: true] 
+    %>
+
+    <div>
+      <%= submit "Enter" %>
+    </div>
+  <% end %>
+</div>
